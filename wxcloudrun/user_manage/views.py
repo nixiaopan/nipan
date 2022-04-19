@@ -1,21 +1,22 @@
 import traceback
 import json
 from wxcloudrun.utils.logger import logger
-from wxcloudrun.commons.constant import ResponsCode,IdentityType
-from wxcloudrun.mapper.user_info import insert_user_data,update_user_data,get_user_data
-from wxcloudrun.utils.decorators import get_params,json_response
+from wxcloudrun.commons.constant import ResponsCode, IdentityType
+from wxcloudrun.mapper.user_info import insert_user_data, update_user_data, get_user_data
+from wxcloudrun.utils.decorators import get_params, json_response
 from wxcloudrun.utils.exception import InvalidParameter
 
 
-def user_param_check(phone_number=None,identity_type=None):
+def user_param_check(phone_number=None, identity_type=None):
     if phone_number and len(phone_number) != 11:
         raise InvalidParameter('手机号长度异常')
     if identity_type and int(identity_type) not in [IdentityType.ANCHOR, IdentityType.BUSINESSES]:
         raise InvalidParameter('用户类型异常')
 
+
 @json_response
 @get_params
-def user_register(request,openid,identity_type,icon,pet_name):
+def user_register(request, openid, identity_type, icon, pet_name):
     """
     :param request:
     :param openid: 用户唯一标识，heard中获取即可
@@ -27,20 +28,21 @@ def user_register(request,openid,identity_type,icon,pet_name):
     rsp = {'code': ResponsCode.FAILED, 'data': '', "msg": '注册失败'}
     try:
         user_param_check(identity_type=identity_type)
-        is_success = insert_user_data(openid,identity_type,icon,pet_name)
+        is_success = insert_user_data(openid, identity_type, icon, pet_name)
         if is_success:
-            rsp = {'code': ResponsCode.SUCCESS, 'data': '',"msg":'注册成功'}
+            rsp = {'code': ResponsCode.SUCCESS, 'data': '', "msg": '注册成功'}
     except InvalidParameter as e:
         rsp = {'code': ResponsCode.FAILED, 'data': '', "msg": str(e)}
     except:
         logger.exception(traceback.format_exc())
-        rsp = {'code': ResponsCode.EXCEPTION, 'data': '',"msg":'注册异常'}
+        rsp = {'code': ResponsCode.EXCEPTION, 'data': '', "msg": '注册异常'}
     finally:
         return rsp
 
+
 @json_response
 @get_params
-def update_user_info(request,openid):
+def update_user_info(request, openid):
     """
     :param request:
     :param openid: 用户id（唯一）
@@ -52,7 +54,7 @@ def update_user_info(request,openid):
     rsp = {'code': ResponsCode.FAILED, 'data': '', "msg": '修改失败'}
     try:
         print(request.body)
-        is_success = update_user_data(openid,json.loads(request.body))
+        is_success = update_user_data(openid, json.loads(request.body))
         if is_success:
             rsp = {'code': ResponsCode.SUCCESS, 'data': '', "msg": '修改成功'}
     except InvalidParameter as e:
@@ -63,16 +65,17 @@ def update_user_info(request,openid):
     finally:
         return rsp
 
+
 @json_response
 @get_params
-def get_user_info(request,openid):
+def get_user_info(request, openid):
     '''
     :param request:
     :return:{'code': ResponsCode.FAILED, 'data': '', "msg": '获取失败'}，code：200成功，450失败，550异常
     '''
     rsp = {'code': ResponsCode.FAILED, 'data': '', "msg": '获取失败'}
     try:
-        is_success,user_data = get_user_data(openid)
+        is_success, user_data = get_user_data(openid)
         if user_data:
             rsp = {'code': ResponsCode.SUCCESS, 'data': user_data[0], "msg": '获取成功'}
         else:
@@ -84,4 +87,3 @@ def get_user_info(request,openid):
         rsp = {'code': ResponsCode.EXCEPTION, 'data': '', "msg": '获取异常'}
     finally:
         return rsp
-
