@@ -15,7 +15,7 @@ Including another URLconf
 """
 
 from wxcloudrun import views
-from django.conf.urls import url,include
+from django.conf.urls import url, include
 
 urlpatterns = (
     # 计数器接口

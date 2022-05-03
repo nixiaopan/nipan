@@ -1,0 +1,482 @@
+[2022-05-03 09:27:23,662] [views.py:233] [views:update_cooperation_info] [ERROR]- Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/cooperation_manage/views.py", line 228, in update_cooperation_info
+    update_cooperation_data(cooperation_id, cur_db_util, json.loads(request.body))
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/mapper/cooperation.py", line 62, in update_cooperation_data
+    logging.INFO(sql_str)
+TypeError: 'int' object is not callable
+Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/cooperation_manage/views.py", line 228, in update_cooperation_info
+    update_cooperation_data(cooperation_id, cur_db_util, json.loads(request.body))
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/mapper/cooperation.py", line 62, in update_cooperation_data
+    logging.INFO(sql_str)
+TypeError: 'int' object is not callable
+[2022-05-03 14:47:25,781] [views.py:234] [views:update_cooperation_info] [ERROR]- Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/cooperation_manage/views.py", line 228, in update_cooperation_info
+    print(cur_db_util.execute_single_sql_in_transaction("select * from cooperation"))
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/utils/SQL/DBUtils.py", line 171, in execute_single_sql_in_transaction
+    self.cursor.execute(sql_str)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+django.db.utils.InterfaceError: (0, '')
+Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/cooperation_manage/views.py", line 228, in update_cooperation_info
+    print(cur_db_util.execute_single_sql_in_transaction("select * from cooperation"))
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/utils/SQL/DBUtils.py", line 171, in execute_single_sql_in_transaction
+    self.cursor.execute(sql_str)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+django.db.utils.InterfaceError: (0, '')
+[2022-05-03 14:48:31,793] [views.py:235] [views:update_cooperation_info] [ERROR]- Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/cooperation_manage/views.py", line 219, in update_cooperation_info
+    print(cur_db_util.execute_single_sql_in_transaction("select * from cooperation"))
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/utils/SQL/DBUtils.py", line 171, in execute_single_sql_in_transaction
+    self.cursor.execute(sql_str)
+AttributeError: 'NoneType' object has no attribute 'execute'
+Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/cooperation_manage/views.py", line 219, in update_cooperation_info
+    print(cur_db_util.execute_single_sql_in_transaction("select * from cooperation"))
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/utils/SQL/DBUtils.py", line 171, in execute_single_sql_in_transaction
+    self.cursor.execute(sql_str)
+AttributeError: 'NoneType' object has no attribute 'execute'
+[2022-05-03 14:49:23,081] [views.py:236] [views:update_cooperation_info] [ERROR]- Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/cooperation_manage/views.py", line 230, in update_cooperation_info
+    print(cur_db_util.execute_single_sql_in_transaction("select * from cooperation"))
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/utils/SQL/DBUtils.py", line 171, in execute_single_sql_in_transaction
+    self.cursor.execute(sql_str)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+django.db.utils.InterfaceError: (0, '')
+Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/cooperation_manage/views.py", line 230, in update_cooperation_info
+    print(cur_db_util.execute_single_sql_in_transaction("select * from cooperation"))
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/utils/SQL/DBUtils.py", line 171, in execute_single_sql_in_transaction
+    self.cursor.execute(sql_str)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+django.db.utils.InterfaceError: (0, '')
+[2022-05-03 14:50:12,377] [views.py:237] [views:update_cooperation_info] [ERROR]- Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/cooperation_manage/views.py", line 231, in update_cooperation_info
+    print(cur_db_util.execute_single_sql_in_transaction("select * from cooperation"))
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/utils/SQL/DBUtils.py", line 171, in execute_single_sql_in_transaction
+    self.cursor.execute(sql_str)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+django.db.utils.InterfaceError: (0, '')
+Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/cooperation_manage/views.py", line 231, in update_cooperation_info
+    print(cur_db_util.execute_single_sql_in_transaction("select * from cooperation"))
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/utils/SQL/DBUtils.py", line 171, in execute_single_sql_in_transaction
+    self.cursor.execute(sql_str)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+django.db.utils.InterfaceError: (0, '')
+[2022-05-03 14:51:20,889] [views.py:233] [views:update_cooperation_info] [ERROR]- Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/cooperation_manage/views.py", line 228, in update_cooperation_info
+    update_cooperation_data(cooperation_id, cur_db_util, json.loads(request.body))
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/mapper/cooperation.py", line 64, in update_cooperation_data
+    cur_db_util.execute_single_sql_in_transaction(sql_str)
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/utils/SQL/DBUtils.py", line 171, in execute_single_sql_in_transaction
+    self.cursor.execute(sql_str)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+django.db.utils.InterfaceError: (0, '')
+Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/cooperation_manage/views.py", line 228, in update_cooperation_info
+    update_cooperation_data(cooperation_id, cur_db_util, json.loads(request.body))
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/mapper/cooperation.py", line 64, in update_cooperation_data
+    cur_db_util.execute_single_sql_in_transaction(sql_str)
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/utils/SQL/DBUtils.py", line 171, in execute_single_sql_in_transaction
+    self.cursor.execute(sql_str)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+django.db.utils.InterfaceError: (0, '')
+[2022-05-03 14:51:52,136] [views.py:236] [views:update_cooperation_info] [ERROR]- Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/cooperation_manage/views.py", line 231, in update_cooperation_info
+    update_cooperation_data(cooperation_id, cur_db_util, json.loads(request.body))
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/mapper/cooperation.py", line 64, in update_cooperation_data
+    cur_db_util.execute_single_sql_in_transaction(sql_str)
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/utils/SQL/DBUtils.py", line 171, in execute_single_sql_in_transaction
+    self.cursor.execute(sql_str)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+django.db.utils.InterfaceError: (0, '')
+Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+pymysql.err.InterfaceError: (0, '')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/cooperation_manage/views.py", line 231, in update_cooperation_info
+    update_cooperation_data(cooperation_id, cur_db_util, json.loads(request.body))
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/mapper/cooperation.py", line 64, in update_cooperation_data
+    cur_db_util.execute_single_sql_in_transaction(sql_str)
+  File "/Users/fantasy/Downloads/nipan/wxcloudrun/utils/SQL/DBUtils.py", line 171, in execute_single_sql_in_transaction
+    self.cursor.execute(sql_str)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 98, in execute
+    return super().execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 66, in execute
+    return self._execute_with_wrappers(sql, params, many=False, executor=self._execute)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 75, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 84, in _execute
+    return self.cursor.execute(sql, params)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/utils.py", line 90, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/utils.py", line 82, in _execute
+    return self.cursor.execute(sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/django/db/backends/mysql/base.py", line 73, in execute
+    return self.cursor.execute(query, args)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 148, in execute
+    result = self._query(query)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/cursors.py", line 310, in _query
+    conn.query(q)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 547, in query
+    self._execute_command(COMMAND.COM_QUERY, sql)
+  File "/Users/fantasy/Downloads/nipan/venv/lib/python3.8/site-packages/pymysql/connections.py", line 793, in _execute_command
+    raise err.InterfaceError(0, "")
+django.db.utils.InterfaceError: (0, '')

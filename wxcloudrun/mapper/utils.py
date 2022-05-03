@@ -4,7 +4,9 @@
 @time: 2022/4/9 13:25
 '''
 from wxcloudrun.utils.SQL.DBUtils import db_utils
-def get_table_column_name(table):
+
+
+def get_table_column_name(table,cur_db_util=None):
     '''
     获取表中的所有的字段
     :return:
@@ -14,7 +16,10 @@ def get_table_column_name(table):
             select  column_name as column_name from information_schema.columns where table_schema ='django_demo'  and table_name = "{table}"
             '''.format(table=table)
     print(sql)
-    _, results = db_utils.execute_single_sql(sql)
+    if cur_db_util:
+        results = cur_db_util.execute_single_sql_in_transaction(sql)
+    else:
+        _, results = db_utils.execute_single_sql(sql)
     if results:
         for result in results:
             column_name_list.append(result.get('column_name'))

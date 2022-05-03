@@ -3,14 +3,14 @@ import time
 from pathlib import Path
 from wxcloudrun.config import IS_TEST_ENV
 
-CUR_PATH = os.path.dirname(os.path.realpath(__file__))  
-LOG_PATH = os.path.join(os.path.dirname(CUR_PATH), 'logs') # LOG_PATH是存放日志的路径
+CUR_PATH = os.path.dirname(os.path.realpath(__file__))
+LOG_PATH = os.path.join(os.path.dirname(CUR_PATH), 'logs')  # LOG_PATH是存放日志的路径
 if not os.path.exists(LOG_PATH): os.mkdir(LOG_PATH)  # 如果不存在这个logs文件夹，就自动创建一个
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL='/media/'
+MEDIA_URL = '/media/'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 

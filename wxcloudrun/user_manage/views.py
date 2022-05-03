@@ -18,12 +18,15 @@ def user_param_check(phone_number=None, identity_type=None):
 @get_params
 def user_register(request, openid, identity_type, icon, pet_name):
     """
-    :param request:
-    :param openid: 用户唯一标识，heard中获取即可
+    用户注册，只能注册一次
+    :request method: POST
     :param identity_type: 1是主播，2是商户
     :param icon: 用户头像路径
     :param pet_name: 用户昵称
-    :return:{'code': ResponsCode.FAILED, 'data': '', "msg": '注册失败'}，code：200成功，450失败，550异常
+    :return:code：200成功，450失败，550异常
+    {'code': ResponsCode.FAILED, 'data': '', "msg": '注册失败'}
+    {'code': ResponsCode.SUCCESS, 'data': '', "msg": '注册成功'}
+    {'code': ResponsCode.EXCEPTION, 'data': '', "msg": '注册异常'}
     """
     rsp = {'code': ResponsCode.FAILED, 'data': '', "msg": '注册失败'}
     try:
@@ -44,16 +47,20 @@ def user_register(request, openid, identity_type, icon, pet_name):
 @get_params
 def update_user_info(request, openid):
     """
-    :param request:
-    :param openid: 用户id（唯一）
-    :param phone_number: 手机号(非必填)
+    修改用户信息，以下参数传啥改啥
+    :request method: POST
+    :param phone_number: 手机号
     :param shipping_address:收货地址
     :param wechat:微信号
-    :return:{'code': ResponsCode.FAILED, 'data': '', "msg": '修改失败'}，code：200成功，450失败，550异常
+    :param job_title: 职位（第一个版本应该不要）
+    :param real_name:真实姓名（或者说收货人姓名）
+    :return: code：200成功，450失败，550异常
+    {'code': ResponsCode.FAILED, 'data': '', "msg": '修改失败'}，
+    {'code': ResponsCode.SUCCESS, 'data': '', "msg": '修改成功'}
+    {'code': ResponsCode.EXCEPTION, 'data': '', "msg": '修改异常'}
     """
     rsp = {'code': ResponsCode.FAILED, 'data': '', "msg": '修改失败'}
     try:
-        print(request.body)
         is_success = update_user_data(openid, json.loads(request.body))
         if is_success:
             rsp = {'code': ResponsCode.SUCCESS, 'data': '', "msg": '修改成功'}
@@ -70,8 +77,12 @@ def update_user_info(request, openid):
 @get_params
 def get_user_info(request, openid):
     '''
-    :param request:
-    :return:{'code': ResponsCode.FAILED, 'data': '', "msg": '获取失败'}，code：200成功，450失败，550异常
+    获取当前用户的信息
+    :request method: GET
+    :return:code：200成功，450失败，550异常
+    {'code': ResponsCode.FAILED, 'data': '', "msg": '获取失败'}
+    {'code': ResponsCode.SUCCESS, 'data': user_data, "msg": '获取成功'}
+    {'code': ResponsCode.EXCEPTION, 'data': '', "msg": '获取异常'}
     '''
     rsp = {'code': ResponsCode.FAILED, 'data': '', "msg": '获取失败'}
     try:

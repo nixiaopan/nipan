@@ -1,4 +1,3 @@
-
 import functools
 import inspect
 import json
@@ -6,6 +5,7 @@ from wxcloudrun.utils.logger import logger
 from wxcloudrun.commons.constant import ResponsCode
 from wxcloudrun.config import IS_TEST_ENV
 from django.http import JsonResponse
+
 
 def get_params(func):
     func_params = inspect.signature(func).parameters
@@ -44,9 +44,9 @@ def get_params(func):
                 return {"code": ResponsCode.FAILED, "msg": "参数必须为json形式", "data": ""}
             success, data = pick_params(func_params, json_params)
             if success:
-                return func(request,openid,**data)
+                return func(request, openid, **data)
             else:
-                return {"code": ResponsCode.FAILED, "msg": data, "data":""}
+                return {"code": ResponsCode.FAILED, "msg": data, "data": ""}
         elif request.method == "GET":
             return func(request, openid)
         else:
@@ -61,4 +61,5 @@ def json_response(func):
         data = func(*args, **kwargs)
         logger.info(data)
         return JsonResponse(data, json_dumps_params={'ensure_ascii': False})
+
     return wrapper

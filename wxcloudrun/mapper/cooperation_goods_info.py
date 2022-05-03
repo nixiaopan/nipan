@@ -6,11 +6,12 @@
 from wxcloudrun.mapper.utils import get_table_column_name
 from wxcloudrun.utils.SQL.DBUtils import db_utils
 
-need_escapr_string_list=["goods_url","pic_path","brand","goods_name","specification",
-                        "selling_point","storage_condition","unsuitable_people", "daily_price","lowest_price",
-                         "tmall_price","taobao_price","other_price","live_price", "preferential_way","delivery_company",
-                         "shipping_addresses","free_shipping","not_shipping","comment","store_name"]
-can_not_update_string_list = ["openid","id"]
+need_escapr_string_list = ["goods_url", "pic_path", "brand", "goods_name", "specification",
+                           "selling_point", "storage_condition", "unsuitable_people", "daily_price", "lowest_price",
+                           "tmall_price", "taobao_price", "other_price", "live_price", "preferential_way",
+                           "delivery_company",
+                           "shipping_addresses", "free_shipping", "not_shipping", "comment", "store_name"]
+can_not_update_string_list = ["openid", "id"]
 
 
 def insert_goods_data(cooperation_id, kwargs):

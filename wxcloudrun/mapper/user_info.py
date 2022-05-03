@@ -6,16 +6,18 @@
 from wxcloudrun.mapper.utils import get_table_column_name
 from wxcloudrun.utils.SQL.DBUtils import db_utils
 
-need_escapr_string_list = ["shipping_address","job_title","wechat","pet_name"]
-can_not_update_string_list = ["openid","identity_type"]
+need_escapr_string_list = ["shipping_address", "job_title", "wechat", "pet_name"]
+can_not_update_string_list = ["openid", "identity_type"]
 
-def insert_user_data(openid,identity_type,icon,pet_name):
+
+def insert_user_data(openid, identity_type, icon, pet_name):
     sql_str = '''
     insert into  user_info set openid = "{openid}", identity_type="{identity_type}",icon="{icon}",pet_name = "{pet_name}"
-    '''.format(openid=openid, identity_type=identity_type,icon=icon,pet_name=db_utils.escape_string(pet_name))
+    '''.format(openid=openid, identity_type=identity_type, icon=icon, pet_name=db_utils.escape_string(pet_name))
     print(sql_str)
     is_success, data = db_utils.execute_single_sql(sql_str)
     return is_success
+
 
 def update_user_data(openid, kwargs):
     column_name_list = get_table_column_name("user_info")
@@ -33,10 +35,11 @@ def update_user_data(openid, kwargs):
     res, _ = db_utils.execute_single_sql(sql_str)
     return res
 
+
 def get_user_data(openid):
     sql_str = '''
-            select id,identity_type,phone_number,shipping_address,job_title,real_name,wechat from user_info where openid = '{openid}'
+            select * from user_info where openid = '{openid}'
             '''.format(openid=openid)
     print(sql_str)
     is_success, data = db_utils.execute_single_sql(sql_str)
-    return is_success,data
+    return is_success, data
