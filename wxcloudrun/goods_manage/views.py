@@ -5,14 +5,13 @@ from wxcloudrun.utils.logger import logger
 from wxcloudrun.commons.constant import ResponsCode
 from wxcloudrun.mapper.goods_info import insert_goods_data, update_goods_data_by_id, get_goods_data, \
     get_store_goods_data
-from wxcloudrun.mapper.store_info import get_store_data_by_store_id
+from wxcloudrun.mapper.store_info import get_store_data_by_store_id,insert_store_info
 from wxcloudrun.utils.decorators import get_params, json_response
-from wxcloudrun.mapper.store_info import insert_store_info
 
 
 @json_response
 @get_params
-def add_goods(request, openid, store_id,
+def add_goods(request, openid, store_id, store_name, dsr,
               specification, brand, favorable_rate, pic_path, live_recording_screen_path, daily_price, commission_rate,
               pos_price, preferential_way, goods_url, hand_card,
               storage_condition, shelf_life, unsuitable_people, ability_to_deliver, shipping_cycle, shipping_addresses,
@@ -21,6 +20,8 @@ def add_goods(request, openid, store_id,
     :request method: POST
     商铺信息
     :param store_id: 店铺id(最长45位)
+    :param store_name: 店铺id(最长45位)
+    :param dsr: 店铺评分
     商品信息
     :param goods_name: 商品名称
     :param specification: 规格
@@ -63,7 +64,9 @@ def add_goods(request, openid, store_id,
     try:
         _, data = get_store_data_by_store_id(openid, store_id)
         if not data:
-            raise InvalidParameter('店铺不存在')
+            is_success = insert_store_info(store_id, store_name, dsr, openid, ignore=True)
+            if not is_success:
+                raise InvalidParameter('店铺不存在,且新建失败')
         is_success, pk = insert_goods_data(openid, json.loads(request.body))
         if is_success:
             rsp = {'code': ResponsCode.SUCCESS, 'data': {"goods_id": pk}, "msg": '添加商品成功'}
@@ -78,12 +81,14 @@ def add_goods(request, openid, store_id,
 
 @json_response
 @get_params
-def update_goods(request, openid, goods_id, store_id):
+def update_goods(request, openid, goods_id, store_id, store_name, dsr):
     """
     修改商品信息，传啥改啥，goods_id，store_id必传
     :request method: POST
     商铺信息
     :param store_id: 店铺id(最长45位)
+    :param store_name: 店铺id(最长45位)
+    :param dsr: 店铺评分
     商品信息
     :param goods_id:商品id
     :param goods_name: 商品名称
@@ -127,7 +132,9 @@ def update_goods(request, openid, goods_id, store_id):
     try:
         _, data = get_store_data_by_store_id(openid, store_id)
         if not data:
-            raise InvalidParameter('店铺不存在')
+            is_success = insert_store_info(store_id, store_name, dsr, openid, ignore=True)
+            if not is_success:
+                raise InvalidParameter('店铺不存在,且新建失败')
         is_success = update_goods_data_by_id(openid, goods_id, json.loads(request.body))
         if is_success:
             rsp = {'code': ResponsCode.SUCCESS, 'data': '', "msg": '更新商品成功'}

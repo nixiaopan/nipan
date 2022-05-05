@@ -43,3 +43,15 @@ def get_user_data(openid):
     print(sql_str)
     is_success, data = db_utils.execute_single_sql(sql_str)
     return is_success, data
+
+def get_user_data_dict():
+    sql_str = '''
+            select * from user_info
+            '''
+    print(sql_str)
+    user_data_dict = {}
+    is_success, data = db_utils.execute_single_sql(sql_str)
+
+    for row in data:
+        user_data_dict[row.get("openid")] = row
+    return user_data_dict

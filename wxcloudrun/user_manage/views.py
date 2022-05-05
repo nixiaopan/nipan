@@ -2,7 +2,7 @@ import traceback
 import json
 from wxcloudrun.utils.logger import logger
 from wxcloudrun.commons.constant import ResponsCode, IdentityType
-from wxcloudrun.mapper.user_info import insert_user_data, update_user_data, get_user_data
+from wxcloudrun.mapper.user_info import insert_user_data, update_user_data, get_user_data, get_user_data_dict
 from wxcloudrun.utils.decorators import get_params, json_response
 from wxcloudrun.utils.exception import InvalidParameter
 
@@ -91,6 +91,30 @@ def get_user_info(request, openid):
             rsp = {'code': ResponsCode.SUCCESS, 'data': user_data[0], "msg": '获取成功'}
         else:
             rsp = {'code': ResponsCode.FAILED, 'data': '', "msg": '没有该用户'}
+    except InvalidParameter as e:
+        rsp = {'code': ResponsCode.FAILED, 'data': '', "msg": str(e)}
+    except:
+        logger.exception(traceback.format_exc())
+        rsp = {'code': ResponsCode.EXCEPTION, 'data': '', "msg": '获取异常'}
+    finally:
+        return rsp
+
+
+@json_response
+@get_params
+def get_all_user_info(request, openid):
+    '''
+    获取所有用户的信息字典
+    :request method: GET
+    :return:code：200成功，450失败，550异常
+    {'code': ResponsCode.FAILED, 'data': '', "msg": '获取失败'}
+    {'code': ResponsCode.SUCCESS, 'data': user_data, "msg": '获取成功'}
+    {'code': ResponsCode.EXCEPTION, 'data': '', "msg": '获取异常'}
+    '''
+    rsp = {'code': ResponsCode.FAILED, 'data': '', "msg": '获取失败'}
+    try:
+        user_data_dict = get_user_data_dict()
+        rsp = {'code': ResponsCode.SUCCESS, 'data': user_data_dict, "msg": '获取成功'}
     except InvalidParameter as e:
         rsp = {'code': ResponsCode.FAILED, 'data': '', "msg": str(e)}
     except:

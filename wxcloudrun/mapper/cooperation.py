@@ -76,14 +76,16 @@ def update_cooperation_status(cooperation_id, anchor_openid, new_status, old_sta
 
 
 def update_cooperation_status_and_set_shipping_info(cooperation_id, new_status, old_status, anchor_shipping_address,
-                                                    anchor_phone_number, anchor_name, sample_count, cur_db_util=None):
+                                                    anchor_phone_number, anchor_name, sample_count, sample_comment, cur_db_util=None):
     sql = """
     update cooperation set status ={new_status}, anchor_shipping_address="{anchor_shipping_address}", 
-    anchor_phone_number="{anchor_phone_number}",anchor_name="{anchor_name}",sample_count="{sample_count}" where id = "{cooperation_id}" and status = {old_status}
+    anchor_phone_number="{anchor_phone_number}",anchor_name="{anchor_name}",sample_count="{sample_count}",
+    sample_comment = "{sample_comment}" where id = "{cooperation_id}" and status = {old_status}
     """.format(cooperation_id=cooperation_id, new_status=new_status, old_status=old_status,
                anchor_shipping_address=db_utils.escape_string(anchor_shipping_address),
                anchor_name=db_utils.escape_string(anchor_name),
-               anchor_phone_number=db_utils.escape_string(anchor_phone_number), sample_count=sample_count)
+               anchor_phone_number=db_utils.escape_string(anchor_phone_number), sample_count=sample_count,
+               sample_comment=db_utils.escape_string(sample_comment))
     if cur_db_util:
         res = cur_db_util.execute_single_sql_in_transaction(sql)
     else:
@@ -104,11 +106,12 @@ def update_cooperation_status_and_set_sample_courier_number(cooperation_id, new_
     return res
 
 
-def update_cooperation_status_and_set_test_result(cooperation_id, new_status, old_status, test_result, test_comment,
+def update_cooperation_status_and_set_test_result(cooperation_id, new_status, old_status, test_result, test_failed_reason, test_comment,
                                                   cur_db_util=None):
     sql = """
-    update cooperation set status ={new_status}, test_result="{test_result}",test_comment="{test_comment}" where id = "{cooperation_id}" and status = {old_status}
+    update cooperation set status ={new_status}, test_result="{test_result}",test_failed_reason="{test_failed_reason}",test_comment="{test_comment}"  where id = "{cooperation_id}" and status = {old_status}
     """.format(cooperation_id=cooperation_id, new_status=new_status, old_status=old_status, test_result=test_result,
+               test_failed_reason=db_utils.escape_string(test_failed_reason),
                test_comment=db_utils.escape_string(test_comment) if test_comment else "")
     if cur_db_util:
         res = cur_db_util.execute_single_sql_in_transaction(sql)

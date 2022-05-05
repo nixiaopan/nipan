@@ -264,8 +264,8 @@ def send_apply(request, openid, cooperation_id, anchor_openid):
     # openid = "oJ92T5adaBqYeg9lC_9ouxHKoHfQ"
     rsp = {'code': ResponsCode.FAILED, 'data': '', "msg": '合作申请发送失败'}
     try:
-        if not identity_check(openid, IdentityType.BUSINESSES):
-            raise PreconditionErr("只有商家才能发送申请")
+        # if not identity_check(openid, IdentityType.BUSINESSES):
+        #     raise PreconditionErr("只有商家才能发送申请")
         if not identity_check(anchor_openid, IdentityType.ANCHOR):
             raise PreconditionErr("发送对象不是主播")
         cur_db_util = DBUtils()
@@ -293,7 +293,7 @@ def send_apply(request, openid, cooperation_id, anchor_openid):
 @json_response
 @get_params
 def apply_for_sample(request, openid, cooperation_id, anchor_name, anchor_phone_number, anchor_shipping_address,
-                     sample_count):
+                     sample_count, sample_comment):
     """
     主播才能发送申请领取样品
     :request method: POST
@@ -302,6 +302,7 @@ def apply_for_sample(request, openid, cooperation_id, anchor_name, anchor_phone_
     :param anchor_phone_number: 主播手机号
     :param anchor_shipping_address: 主播收货地址
     :param sample_count: 样品个数
+    :param sample_comment: 其他要求
     :return:
     {'code': ResponsCode.FAILED, 'data': '', "msg": '领样申请发送失败'}
     {'code': ResponsCode.FAILED, 'data': '', "msg": '只有主播才能发送领样申请'}
@@ -316,7 +317,8 @@ def apply_for_sample(request, openid, cooperation_id, anchor_name, anchor_phone_
     "anchor_shipping_address":"浙江省杭州市11111111区",
     "anchor_phone_number":"13777861401",
     "anchor_name":"倪攀",
-    "sample_count":1
+    "sample_count":1,
+    "sample_comment":"333"
     }
     """
     # openid = "oJ92T5adaBqYeg9lC_9ouxHKoHfQ"
@@ -338,8 +340,8 @@ def apply_for_sample(request, openid, cooperation_id, anchor_name, anchor_phone_
             update_cooperation_status_and_set_shipping_info(cooperation_id,
                                                             CooperationStatus.WAITING_FOR_MERCHANT_SEND_SAMPLE,
                                                             CooperationStatus.WAITING_FOR_ANCHOR_GET_SAMPLE,
-                                                            anchor_shipping_address,
-                                                            anchor_phone_number, anchor_name, sample_count, cur_db_util)
+                                                            anchor_shipping_address, anchor_phone_number,
+                                                            anchor_name, sample_count, sample_comment, cur_db_util)
             rsp = {'code': ResponsCode.SUCCESS, 'data': '', "msg": '领样申请发送成功，等待商家发送样品'}
     except PreconditionErr as e:
         rsp = {'code': ResponsCode.FAILED, 'data': '', "msg": str(e)}
@@ -404,12 +406,13 @@ def send_sample(request, openid, cooperation_id, sample_courier_number):
 
 @json_response
 @get_params
-def test_sample(request, openid, cooperation_id, test_result, test_comment=None):
+def test_sample(request, openid, cooperation_id, test_result, test_failed_reason=None, test_comment=None):
     """
     试样：主播才能试样
     :request method: POST
     :param cooperation_id: 合作id
     :param test_result: 试样结果0未试样，1试样通过，2试样不通过
+    :param test_failed_reason: 测试不通过原因
     :param test_comment: 测试结果说明（失败请填写备注）
     :return:
     {'code': ResponsCode.FAILED, 'data': '', "msg": '试样结果填写失败'}
@@ -426,7 +429,8 @@ def test_sample(request, openid, cooperation_id, test_result, test_comment=None)
     {
     "cooperation_id":"1",
     "test_result":"2",
-    "test_comment":"太辣鸡了"
+    "test_comment":"太辣鸡了",
+    "test_failed_reason":"其他"
 }
     """
     # openid = "oJ92T5adaBqYeg9lC_9ouxHKoHfQ"
@@ -457,7 +461,7 @@ def test_sample(request, openid, cooperation_id, test_result, test_comment=None)
                 raise PreconditionErr("测试状态错误")
             update_cooperation_status_and_set_test_result(cooperation_id, CooperationStatus.SAMPLE_TEST_END,
                                                           CooperationStatus.WAITING_FOR_ANCHOR_TEST_SAMPLE, test_result,
-                                                          test_comment, cur_db_util)
+                                                          test_failed_reason, test_comment, cur_db_util)
             rsp = {'code': ResponsCode.SUCCESS, 'data': '', "msg": '试样结果填写成功，合作完成'}
     except PreconditionErr as e:
         rsp = {'code': ResponsCode.FAILED, 'data': '', "msg": str(e)}

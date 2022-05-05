@@ -56,8 +56,9 @@ def update_goods_data_by_id(openid, goods_id, kwargs):
 
 def get_goods_data(openid, goods_id):
     sql = """
-    select * from goods_info where openid = "{openid}"  "{goods_filter}"
+    select * from goods_info where openid = "{openid}"  {goods_filter}
     """.format(openid=openid, goods_filter=" and id = {0}".format(goods_id) if goods_id else "")
+    print(sql)
     return db_utils.execute_single_sql(sql)
 
 
