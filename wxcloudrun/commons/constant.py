@@ -22,7 +22,8 @@ class CooperationStatus:
     WAITING_FOR_ANCHOR_GET_SAMPLE = 1
     WAITING_FOR_MERCHANT_SEND_SAMPLE = 2
     WAITING_FOR_ANCHOR_TEST_SAMPLE = 3
-    SAMPLE_TEST_END = 4
+    SAMPLE_TEST_END = 4     # 试样结束
+    UNINTERESTED = 5    # 不感兴趣
 
 
 class SampleTestStatus:

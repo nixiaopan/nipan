@@ -5,9 +5,9 @@ from wxcloudrun.utils.exception import PreconditionErr
 from wxcloudrun.utils.logger import logger
 from wxcloudrun.commons.constant import ResponsCode, IdentityType, CooperationStatus, SampleTestStatus
 from wxcloudrun.mapper.cooperation import insert_cooperation_data, update_cooperation_data, \
-    update_cooperation_status, get_cooperation_status_for_update, get_cooperation_data_for_update, \
+    update_cooperation_status_and_anchor_openid, get_cooperation_status_for_update, get_cooperation_data_for_update, \
     update_cooperation_status_and_set_sample_courier_number, update_cooperation_status_and_set_shipping_info, \
-    update_cooperation_status_and_set_test_result, get_cooperation_data_by_status
+    update_cooperation_status_and_set_test_result, get_cooperation_data_by_status, update_cooperation_status
 from wxcloudrun.mapper.user_info import get_user_data
 from wxcloudrun.utils.decorators import get_params, json_response
 
@@ -278,14 +278,61 @@ def send_apply(request, openid, cooperation_id, anchor_openid):
                     raise PreconditionErr("合作单已发送，请勿重复发送")
                 if data[0].get("merchant_openid") != openid:
                     raise PreconditionErr("身份错误，无权限发送申请")
-            update_cooperation_status(cooperation_id, anchor_openid, CooperationStatus.WAITING_FOR_ANCHOR_GET_SAMPLE,
-                                      CooperationStatus.UNSENT_COOPERATION, cur_db_util)
+            update_cooperation_status_and_anchor_openid(cooperation_id, anchor_openid,
+                                                        CooperationStatus.WAITING_FOR_ANCHOR_GET_SAMPLE,
+                                                        CooperationStatus.UNSENT_COOPERATION, cur_db_util)
             rsp = {'code': ResponsCode.SUCCESS, 'data': '', "msg": '合作申请发送成功，等待主播申请领样'}
     except PreconditionErr as e:
         rsp = {'code': ResponsCode.FAILED, 'data': '', "msg": str(e)}
     except:
         logger.exception(traceback.format_exc())
         rsp = {'code': ResponsCode.EXCEPTION, 'data': '', "msg": '合作申请发送异常，请稍后再试'}
+    finally:
+        return rsp
+
+@json_response
+@get_params
+def ignore_apply(request, openid, cooperation_id):
+    """
+    主播才能发送申请领取样品
+    :request method: POST
+    :param cooperation_id: 合作id
+    :return:
+    {'code': ResponsCode.FAILED, 'data': '', "msg": '忽略订单失败'}
+    {'code': ResponsCode.FAILED, 'data': '', "msg": '只有主播才能忽略申请'}
+    {'code': ResponsCode.FAILED, 'data': '', "msg": '合作单不存在'}
+    {'code': ResponsCode.FAILED, 'data': '', "msg": "不在申请领样阶段，无法忽略订单"}
+    {'code': ResponsCode.FAILED, 'data': '', "msg": '身份错误，无权限忽略订单'}
+    {'code': ResponsCode.SUCCESS, 'data': '',"msg":'已忽略订单'}
+    {'code': ResponsCode.EXCEPTION, 'data': '',"msg":'忽略订单异常，请稍后再试'}
+    :Exampl:
+    {
+    "cooperation_id":"1",
+    }
+    """
+    rsp = {'code': ResponsCode.FAILED, 'data': '', "msg": '忽略订单失败'}
+    try:
+        if not identity_check(openid, IdentityType.ANCHOR):
+            raise PreconditionErr("只有主播才能忽略申请")
+        cur_db_util = DBUtils()
+        with cur_db_util.transcontext(True):
+            data = get_cooperation_data_for_update(cooperation_id, cur_db_util)
+            if not data:
+                raise PreconditionErr('合作单不存在')
+            else:
+                if data[0].get("status") != CooperationStatus.WAITING_FOR_ANCHOR_GET_SAMPLE:
+                    raise PreconditionErr("不在申请领样阶段，无法忽略订单")
+                if data[0].get("anchor_openid") != openid:
+                    raise PreconditionErr("身份错误，无权限忽略订单")
+            update_cooperation_status(cooperation_id, CooperationStatus.UNINTERESTED,
+                                      CooperationStatus.WAITING_FOR_ANCHOR_GET_SAMPLE, cur_db_util)
+
+            rsp = {'code': ResponsCode.SUCCESS, 'data': '', "msg": '已忽略订单'}
+    except PreconditionErr as e:
+        rsp = {'code': ResponsCode.FAILED, 'data': '', "msg": str(e)}
+    except:
+        logger.exception(traceback.format_exc())
+        rsp = {'code': ResponsCode.EXCEPTION, 'data': '', "msg": '忽略订单异常，请稍后再试'}
     finally:
         return rsp
 

@@ -8,8 +8,8 @@ import logging
 from wxcloudrun.mapper.utils import get_table_column_name
 from wxcloudrun.utils.SQL.DBUtils import db_utils
 
-need_escape_string_list = ["goods_name", "specification", "brand", "favorable_rate", "pic_path",
-                           "live_recording_screen_path", "daily_price", "live_price",
+need_escape_string_list = ["goods_name", "specification", "brand",  "pic_path",
+                           "live_recording_screen_path",
                            "preferential_way", "goods_url", "hand_card", "tmall_price", "taobao_price", "jd_price",
                            "pdd_price", "offline_price", "storage_condition", "shelf_life", "unsuitable_people",
                            "shipping_cycle", "shipping_addresses", "delivery_company", "not_shipping",
@@ -22,10 +22,13 @@ def insert_cooperation_data(merchant_openid, kwargs):
     sql_str = 'insert into  cooperation set '
     for k, v in kwargs.items():
         if k in column_name_list:
+            if k == "id":
+                continue
             if k in need_escape_string_list:  # 如果该字段需要转义
                 if k == "pic_path":
                     v = ",".join(v)
-                if v != None:
+                if v is not None and type(v) == str:
+                    print("000000000000")
                     v = db_utils.escape_string(v)
             sql_str += '{0}="{1}",'.format(k, v)
     sql_str = '{0} merchant_openid = "{1}"'.format(sql_str, merchant_openid)
@@ -63,8 +66,18 @@ def update_cooperation_data(cooperation_id, cur_db_util, kwargs):
 
     cur_db_util.execute_single_sql_in_transaction(sql_str)
 
+def update_cooperation_status(cooperation_id, new_status, old_status, cur_db_util=None):
+    sql = """
+    update cooperation set status ={new_status} where id = "{cooperation_id}" and status = {old_status}
+    """.format(cooperation_id=cooperation_id, new_status=new_status, old_status=old_status)
+    if cur_db_util:
+        res = cur_db_util.execute_single_sql_in_transaction(sql)
+    else:
+        res, _ = db_utils.execute_single_sql(sql)
+    return res
 
-def update_cooperation_status(cooperation_id, anchor_openid, new_status, old_status, cur_db_util=None):
+
+def update_cooperation_status_and_anchor_openid(cooperation_id, anchor_openid, new_status, old_status, cur_db_util=None):
     sql = """
     update cooperation set anchor_openid = "{anchor_openid}", status ={new_status} where id = "{cooperation_id}" and status = {old_status}
     """.format(cooperation_id=cooperation_id, anchor_openid=anchor_openid, new_status=new_status, old_status=old_status)
