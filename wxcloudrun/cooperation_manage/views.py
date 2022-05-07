@@ -276,8 +276,8 @@ def send_apply(request, openid, cooperation_id, anchor_openid):
             else:
                 if data[0].get("status") != CooperationStatus.UNSENT_COOPERATION:
                     raise PreconditionErr("合作单已发送，请勿重复发送")
-                if data[0].get("merchant_openid") != openid:
-                    raise PreconditionErr("身份错误，无权限发送申请")
+                # if data[0].get("merchant_openid") != openid:
+                #     raise PreconditionErr("身份错误，无权限发送申请")
             update_cooperation_status_and_anchor_openid(cooperation_id, anchor_openid,
                                                         CooperationStatus.WAITING_FOR_ANCHOR_GET_SAMPLE,
                                                         CooperationStatus.UNSENT_COOPERATION, cur_db_util)
